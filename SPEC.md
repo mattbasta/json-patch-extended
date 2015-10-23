@@ -51,6 +51,7 @@ Examples:
 { "op": "exists", "path": "/obj/arr/3" }
 ```
 
+
 ### `absent`
 
 The `absent` operation tests that no value exists at the target location.
@@ -64,6 +65,41 @@ Examples:
 ```json
 { "op": "absent", "path": "/a/b/c" }
 { "op": "absent", "path": "/obj/arr/3" }
+```
+
+
+### `type`
+
+The `type` operation tests that a value at the target loation is of a pre-defined type.
+
+The operation object MUST contain a `type` member that contains an array of type names that are considered acceptable for the value at the target location. The array may not be empty.
+
+The target location MUST contain a value for the operation to be considered successful. The value at the target location must have a type that matches one of the types listed in the operation object's `type` member.
+
+The acceptable values of the array at the `type` member on the operation object are as follows:
+
+<dl>
+  <dt>object</dt>
+  <dd>Represents an object value. Equivalent to `typeof x === 'object' && !Array.isArray(x)` in JavaScript.</dd>
+  <dt>array</dt>
+  <dd>Represents an array value. Equivalent to `Array.isArray(x)` in JavaScript.</dd>
+  <dt>string</dt>
+  <dd>Represents a string. Equivalent to `typeof x === 'string'` in JavaScript.</dd>
+  <dt>number</dt>
+  <dd>Represents a number. Equivalent to `typeof x === 'number'` in JavaScript.</dd>
+  <dt>boolean</dt>
+  <dd>Represents a boolean. Equivalent to `typeof x === 'boolean'` in JavaScript.</dd>
+  <dt>null</dt>
+  <dd>Represents the `null` object. Equivalent to `x === null` in JavaScript.</dd>
+</dl>
+
+This operation has identical error handling behavior as the `test` operation.
+
+Examples:
+
+```json
+{ "op": "type", "type": [ "string", "null" ], "path": "/a/b/c" }
+{ "op": "type", "type": [ "number" ], "path": "/a/b/num" }
 ```
 
 
