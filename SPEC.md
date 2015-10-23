@@ -51,6 +51,21 @@ Examples:
 { "op": "exists", "path": "/obj/arr/3" }
 ```
 
+### `absent`
+
+The `absent` operation tests that no value exists at the target location.
+
+The target location MUST NOT contain any value (including `null`) for the operation to be considered successful. If any ancestor value described by the `path` value is absent, the operation should short-circuit and be considered successful.
+
+This operation has identical error handling behavior as the `test` operation.
+
+Examples:
+
+```json
+{ "op": "absent", "path": "/a/b/c" }
+{ "op": "absent", "path": "/obj/arr/3" }
+```
+
 
 ## Security Considerations
 
