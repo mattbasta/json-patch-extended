@@ -102,6 +102,23 @@ Examples:
 { "op": "type", "type": [ "number" ], "path": "/a/b/num" }
 ```
 
+### `increment`
+
+The `increment` operation increments a numeric value at the target location by a given numeric value.
+
+The operation object MUST contain a `value` member that contains a number value. A value of `0` (or `-0`) is considered a no-op.
+
+The target location MUST contain a numeric value for the operation to be considered successful. When the operation is executed, the value at the target location will be read, incremented by the value in the operation object's `value` value, and written back to the target location.
+
+If the value at the target location exceeds JavaScript's `Number.MAX_VALUE` or falls below `Number.MIN_VALUE`, the operation should not be considered successful.
+
+Examples:
+
+```json
+{ "op": "increment", "value": 1, "path": "/a/b/c" }
+{ "op": "increment", "value": -5, "path": "/foo/bar/baz" }
+```
+
 
 ## Security Considerations
 
